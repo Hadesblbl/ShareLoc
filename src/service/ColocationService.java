@@ -7,14 +7,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import controller.UserManager;
+import entities.Colocation;
+import entities.User;
+
 @Path("/coloc")
 public class ColocationService {
 
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addColoc(@FormParam("id") String id, @FormParam("owner") String owner) {
-		Colocation coloc = new Colocation(id,owner);
+	public Response createColoc(@FormParam("id") String id, @FormParam("owner")String ownerID) {
+		Colocation coloc = new Colocation();
 		return Response.ok().build();
 	}
 	
@@ -22,7 +26,8 @@ public class ColocationService {
 	@Path("/modify")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response modifyColoc(@FormParam("id") String id, @FormParam("owner") String owner) {
-		Colocation coloc = new Colocation(id,owner);
+		User user = UserManager.getUser(owner);
+		Colocation coloc = new Colocation(id,user);
 		return Response.ok().build();
 	}
 	

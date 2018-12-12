@@ -6,49 +6,53 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
-import database.DBAccess;
-
+import controller.UserManager;
+import entities.User;
 
 @Path("/user")
 public class UserService {
 
-		@POST
-		@Path("/add")
-		@Produces(MediaType.APPLICATION_JSON)
-		public Response addUser(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-			System.out.println(id+" "+pwd);
-			User user = new User(id,pwd);
-			DBAccess.addUser(user);
+	@POST
+	@Path("/add")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addUser(@FormParam("email") String email, @FormParam("firstname") String firstname,
+			@FormParam("lastname") String lastname, @FormParam("password") String password) {
+		User user = new User(email, firstname, lastname, password);
+		if (UserManager.inscription(user))
 			return Response.ok().build();
-		}
+		return Response.status(Status.FORBIDDEN).build();
+	}
 
-		@POST
-		@Path("/authenticate")
-		@Produces(MediaType.APPLICATION_JSON)
-		public Response authenticateUser(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-			System.out.println(id+" "+pwd);
-			User user = new User(id,pwd);
-			if (DBAccess.getUsers().contains(user)) {
-				return Response.ok().build();
-			}
-			return Response.ok().build(); //TODO add error
-		}
-		
-		@POST
-		@Path("/createprofile")
-		@Produces(MediaType.APPLICATION_JSON)
-		public Response createProfile(@FormParam("id") String id, @FormParam("pwd") String pwd, @FormParam("fn") String firstname, @FormParam("ln") String lastname) {
-			System.out.println(id+" "+pwd);//TODO define profile
-			return Response.ok().build();
-		}
-		
-		@POST
-		@Path("/changeprofile")
-		@Produces(MediaType.APPLICATION_JSON)
-		public Response changeProfile(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-			System.out.println(id+" "+pwd);
-			return Response.ok().build();
-		}
+	@POST
+	@Path("/authenticate")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response authenticateUser(@FormParam("email") String email, @FormParam("password") String password) {
+		System.out.println(email + " " + password);
+		User user = UserManager.getUser(email);
+		if (user == null)
+			return Response.status(Status.NOT_FOUND).build();
+		if (!UserManager.login(user, password))
+			return Response.status(Status.FORBIDDEN).build();
+		return Response.ok().build();
+	}
+
+	@POST
+	@Path("/createprofile")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createProfile(@FormParam("id") String id, @FormParam("pwd") String pwd,
+			@FormParam("fn") String firstname, @FormParam("ln") String lastname) {
+		System.out.println(id + " " + pwd);// TODO define profile
+		return Response.ok().build();
+	}
+
+	@POST
+	@Path("/changeprofile")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response changeProfile(@FormParam("id") String id, @FormParam("pwd") String pwd) {
+		System.out.println(id + " " + pwd);
+		return Response.ok().build();
+	}
 
 }

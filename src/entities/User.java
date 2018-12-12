@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,10 +14,6 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID")
-	private int ID;
-	
 	@Column(name = "mail")
 	private String mail;
 	
@@ -36,8 +30,8 @@ public class User {
 	@Column(name = "services")
 	private ArrayList<AchievedService> services = new ArrayList<AchievedService>();
 	
-	@ManyToOne
-	private Colocation coloc = null;
+	@ManyToMany
+	private ArrayList<Colocation> colocs = new ArrayList<Colocation>();
 	
 	public User() {
 		
@@ -50,13 +44,14 @@ public class User {
 		setPassword(password);
 	}
 	
-	public int getID() {
-		return ID;
-	}
-	
 	public String getMail() {
 		return mail;
 	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	
 	
 	public String getFirstname() {
 		return firstname;
@@ -68,10 +63,6 @@ public class User {
 	
 	public String getPassword() {
 		return password;
-	}
-	
-	public void setMail(String mail) {
-		this.mail = mail;
 	}
 	
 	public void setFirstname(String firstname) {

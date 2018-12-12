@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,23 +13,24 @@ import javax.persistence.Table;
 public class Colocation  {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID")
-	private int ID;
-	
 	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "gestionnaire")
+	private User gestionnaire;
+	
 	@Column(name = "colocataires")
-	@OneToMany(mappedBy = "coloc")
+	@ManyToMany(mappedBy = "colocs")
 	private ArrayList<User> colocataires = new ArrayList<User>();
 	
 	public Colocation() {
 		
 	}
 	
-	public int getID() {
-		return ID;
+	public Colocation(String name, User gestionnaire) {
+		setName(name);
+		setGestionnaire(gestionnaire);
+		colocataires.add(gestionnaire);
 	}
 
 	public String getName() {
@@ -50,6 +49,14 @@ public class Colocation  {
 		return colocataires.add(user);
 	}
 	
+	public User getGestionnaire() {
+		return gestionnaire;
+	}
+
+	public void setGestionnaire(User gestionnaire) {
+		this.gestionnaire = gestionnaire;
+	}
+
 	public boolean removeColocataire(User user) {
 		return colocataires.remove(user);
 	}
