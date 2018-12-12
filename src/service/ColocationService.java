@@ -13,16 +13,16 @@ public class ColocationService {
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addColoc(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id+" "+pwd);
+	public Response addColoc(@FormParam("id") String id, @FormParam("owner") String owner) {
+		Colocation coloc = new Colocation(id,owner);
 		return Response.ok().build();
 	}
 	
 	@POST
 	@Path("/modify")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response modifyColoc(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id+" "+pwd);
+	public Response modifyColoc(@FormParam("id") String id, @FormParam("owner") String owner) {
+		Colocation coloc = new Colocation(id,owner);
 		return Response.ok().build();
 	}
 	
