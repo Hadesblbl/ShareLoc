@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +15,7 @@ import javax.persistence.Table;
 public class Colocation  {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private int ID;
 	
@@ -21,6 +23,7 @@ public class Colocation  {
 	private String name;
 	
 	@Column(name = "colocataires")
+	@OneToMany(mappedBy = "coloc")
 	private ArrayList<User> colocataires = new ArrayList<User>();
 	
 	public Colocation() {
