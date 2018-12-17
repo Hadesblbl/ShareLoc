@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name="AchievedServices")
@@ -24,7 +25,8 @@ public class AchievedService {
 	@ManyToOne
 	private User from;
 	
-	@JoinColumn(name = "To")
+	@OneToMany
+	@JoinColumn
 	private ArrayList<User> to = new ArrayList<User>();
 	
 	@Column(name = "Date")

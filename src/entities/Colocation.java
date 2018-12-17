@@ -20,8 +20,8 @@ public class Colocation  {
 	@JoinColumn(name = "gestionnaire")
 	private User gestionnaire;
 	
-	@JoinColumn(name = "colocataires")
-	@ManyToMany(mappedBy = "colocs")
+	@JoinColumn
+	@ManyToMany
 	private ArrayList<User> colocataires = new ArrayList<User>();
 	
 	public Colocation() {

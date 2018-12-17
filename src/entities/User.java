@@ -27,8 +27,8 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToMany(mappedBy="from")
-	@JoinColumn(name = "services")
+	@OneToMany
+	@JoinColumn
 	private ArrayList<AchievedService> services = new ArrayList<AchievedService>();
 	
 	@ManyToMany
