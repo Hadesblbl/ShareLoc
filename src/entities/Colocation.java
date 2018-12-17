@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -16,10 +17,10 @@ public class Colocation  {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "gestionnaire")
+	@JoinColumn(name = "gestionnaire")
 	private User gestionnaire;
 	
-	@Column(name = "colocataires")
+	@JoinColumn(name = "colocataires")
 	@ManyToMany(mappedBy = "colocs")
 	private ArrayList<User> colocataires = new ArrayList<User>();
 	

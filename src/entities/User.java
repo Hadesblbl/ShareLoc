@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,7 +28,7 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy="from")
-	@Column(name = "services")
+	@JoinColumn(name = "services")
 	private ArrayList<AchievedService> services = new ArrayList<AchievedService>();
 	
 	@ManyToMany

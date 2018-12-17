@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 
@@ -17,7 +18,7 @@ public class Service {
 	@Column(name = "ID")
 	private int ID;
 	
-	@Column(name = "Colocation")
+	@JoinColumn(name = "Colocation")
 	private Colocation coloc;
 	
 	@Column(name = "Title")

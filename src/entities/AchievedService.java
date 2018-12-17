@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,11 +20,11 @@ public class AchievedService {
 	@Column(name = "ID")
 	private int ID;
 	
-	@Column(name = "From")
+	@JoinColumn(name = "From")
 	@ManyToOne
 	private User from;
 	
-	@Column(name = "To")
+	@JoinColumn(name = "To")
 	private ArrayList<User> to = new ArrayList<User>();
 	
 	@Column(name = "Date")
@@ -34,7 +35,7 @@ public class AchievedService {
 	@Column(name = "valid")
 	private boolean valid = false;
 	
-	@Column(name = "Service")
+	@JoinColumn(name = "Service")
 	private Service service;
 	
 	
