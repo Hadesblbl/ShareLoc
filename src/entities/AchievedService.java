@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name="AchievedServices")
@@ -25,7 +26,7 @@ public class AchievedService {
 	@ManyToOne
 	private User from;
 	
-	@OneToMany
+	@OneToMany(fetch = EAGER)
 	@JoinColumn
 	private ArrayList<User> to = new ArrayList<User>();
 	
