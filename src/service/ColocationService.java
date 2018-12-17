@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import controller.ColocationManager;
 import controller.UserManager;
 import entities.Colocation;
 import entities.User;
@@ -17,25 +18,26 @@ public class ColocationService {
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createColoc(@FormParam("id") String id, @FormParam("owner")String ownerID) {
-		Colocation coloc = new Colocation();
+	public Response createColoc(@FormParam("colocName") String colocName, @FormParam("mail") String mail) {
+		User user = UserManager.getUser(mail);
+		Colocation coloc = new Colocation(colocName, user);
+		ColocationManager.createColocation(coloc, user);
 		return Response.ok().build();
 	}
-	
+
 	@POST
 	@Path("/modify")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response modifyColoc(@FormParam("id") String id, @FormParam("owner") String owner) {
-		User user = UserManager.getUser(owner);
-		Colocation coloc = new Colocation(id,user);
+	public Response modifyColoc(@FormParam("colocName") String colocName, @FormParam("mail") String mail) {
+		System.out.println(colocName + " " + mail);
 		return Response.ok().build();
 	}
-	
+
 	@POST
 	@Path("/inviteuser")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response inviteUser(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id+" "+pwd);
+		System.out.println(id + " " + pwd);
 		return Response.ok().build();
 	}
 
@@ -43,31 +45,31 @@ public class ColocationService {
 	@Path("/declareservice")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response declareService(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id+" "+pwd);
+		System.out.println(id + " " + pwd);
 		return Response.ok().build();
 	}
-	
+
 	@POST
 	@Path("/newservice")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response newService(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id+" "+pwd);
+		System.out.println(id + " " + pwd);
 		return Response.ok().build();
 	}
-	
+
 	@POST
 	@Path("/voteService")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response voteService(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id+" "+pwd);
+		System.out.println(id + " " + pwd);
 		return Response.ok().build();
 	}
-	
+
 	@POST
 	@Path("/validateService")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response validateService(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id+" "+pwd);
+		System.out.println(id + " " + pwd);
 		return Response.ok().build();
 	}
 
@@ -75,10 +77,8 @@ public class ColocationService {
 	@Path("/chat")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getChat(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id+" "+pwd);
+		System.out.println(id + " " + pwd);
 		return Response.ok().build();
 	}
-
-
 
 }

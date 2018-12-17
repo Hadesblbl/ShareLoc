@@ -32,7 +32,7 @@ public class UserManager {
 	
 	public static boolean changeProfile(User current, User newProfil) {
 		if ((newProfil.getMail() != current.getMail() && daoUser.get(newProfil.getMail()) == null)
-				&& (current != newProfil)) {
+				&& (!current.equals(newProfil))) {
 			daoUser.set(newProfil);
 			return true;
 		}
@@ -47,8 +47,8 @@ public class UserManager {
 		return false;
 	}
 
-	public static boolean acceptInvitation() {
-		return false;// TODO
+	public static boolean acceptInvitation(Colocation coloc, User user) {
+		return ColocationManager.addUserToColoc(coloc, user);
 	}
 
 	public static boolean rejectInvitation() {

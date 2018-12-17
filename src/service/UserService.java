@@ -50,8 +50,12 @@ public class UserService {
 	@POST
 	@Path("/changeprofile")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response changeProfile(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-		System.out.println(id + " " + pwd);
+	public Response changeProfile(@FormParam("mail") String mail,@FormParam("firstname") String firstname,@FormParam("lastname") String lastname, @FormParam("pwd") String pwd) {
+		System.out.println(mail + " " + pwd);
+		User user = UserManager.getUser(mail);
+		User newProfil = new User(mail, firstname, lastname, pwd);
+		if(!UserManager.changeProfile(user, newProfil))
+			return Response.status(Status.FORBIDDEN).build();
 		return Response.ok().build();
 	}
 

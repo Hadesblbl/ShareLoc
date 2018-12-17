@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-
 import dao.DAOColocation;
 import entities.Colocation;
 import entities.User;
@@ -10,12 +8,16 @@ public class ColocationManager {
 
 	private static DAOColocation daoColoc = new DAOColocation();
 	
-	public ColocationManager() {
+	private ColocationManager() {
 		
 	}
 	
-	public static void createColocation(Colocation coloc, ArrayList<User>users) {
+	public static boolean createColocation(Colocation coloc, User user) {
+		if(daoColoc.get(coloc.getName()) != null || user == null)
+			return false;
+		coloc.setGestionnaire(user);
 		daoColoc.create(coloc);
+		return true;
 		
 	}
 	
