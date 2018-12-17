@@ -22,7 +22,7 @@ public class AchievedService {
 	@Column(name = "ID")
 	private int ID;
 	
-	@JoinColumn(name = "From")
+	@JoinColumn(name = "_from")
 	@ManyToOne
 	private User from;
 	
