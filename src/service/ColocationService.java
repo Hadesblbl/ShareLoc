@@ -8,9 +8,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import controller.ColocationManager;
-import controller.UserManager;
-import entities.Colocation;
-import entities.User;
 
 @Path("/coloc")
 public class ColocationService {
@@ -19,9 +16,7 @@ public class ColocationService {
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createColoc(@FormParam("colocName") String colocName, @FormParam("mail") String mail) {
-		User user = UserManager.getUser(mail);
-		Colocation coloc = new Colocation(colocName, user);
-		ColocationManager.createColocation(coloc, user);
+		ColocationManager.createColocation(colocName, mail);
 		return Response.ok().build();
 	}
 
