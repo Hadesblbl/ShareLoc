@@ -17,6 +17,7 @@ public class Colocation  {
 	@Column(name = "name")
 	private String name;
 	
+
 	@JoinColumn(name="Gestionnaire", referencedColumnName="mail")
 	private User gestionnaire;
 	

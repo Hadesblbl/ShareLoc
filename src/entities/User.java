@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name = "Users")
@@ -31,7 +32,7 @@ public class User {
 	@JoinColumn(name="AchievedServices", referencedColumnName="ID")
 	private ArrayList<AchievedService> services = new ArrayList<AchievedService>();
 	
-	@ManyToMany
+	@ManyToMany(fetch = EAGER)
 	private ArrayList<Colocation> colocs = new ArrayList<Colocation>();
 	
 	public User() {

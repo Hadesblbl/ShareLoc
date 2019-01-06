@@ -1,5 +1,7 @@
 package entities;
 
+import static javax.persistence.FetchType.EAGER;
+
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -8,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,11 +22,12 @@ public class AchievedService {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private int ID;
-	
+
 	@ManyToOne
 	@JoinColumn(name="from", referencedColumnName="mail")
 	private User from;
-	
+
+	@OneToMany(fetch = EAGER)
 	@JoinColumn(name="to", referencedColumnName="mail")
 	private ArrayList<User> to = new ArrayList<User>();
 	
