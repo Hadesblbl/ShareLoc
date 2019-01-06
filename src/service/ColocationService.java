@@ -79,9 +79,7 @@ public class ColocationService {
 	@Path("/addcoloc")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createColoc(@FormParam("colocName") String colocName, @FormParam("mail") String mail) {
-		User user = UserManager.getUser(mail);
-		Colocation coloc = new Colocation(colocName, user);
-		ColocationManager.createColocation(coloc, user);
+		ColocationManager.createColocation(colocName, mail);
 		return Response.ok().build(); //TODO p-e rediriger
 	}
 	

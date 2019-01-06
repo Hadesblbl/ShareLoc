@@ -34,7 +34,9 @@ public class ColocationManager {
 		return status;
 	}
 
-	public static boolean removeUserFromColoc(Colocation coloc, User user) {
+	public static boolean removeUserFromColoc(String colocID, String userID) {
+		Colocation coloc = daoColoc.get(colocID);
+		User user = daoUser.get(userID);
 		boolean status = coloc.removeColocataire(user);
 		daoColoc.set(coloc);
 		// TODO remove coloc from user too
