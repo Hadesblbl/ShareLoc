@@ -1,7 +1,5 @@
 package entities;
 
-import static javax.persistence.FetchType.EAGER;
-
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -27,7 +25,7 @@ public class AchievedService {
 	@JoinColumn(name="from", referencedColumnName="mail")
 	private User from;
 
-	@OneToMany(fetch = EAGER)
+	@OneToMany
 	@JoinColumn(name="to", referencedColumnName="mail")
 	private ArrayList<User> to = new ArrayList<User>();
 	
