@@ -19,8 +19,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addUser(@FormParam("email") String email, @FormParam("firstname") String firstname,
 			@FormParam("lastname") String lastname, @FormParam("password") String password) {
-		User user = new User(email, firstname, lastname, password);
-		if (UserManager.inscription(user))
+		if (UserManager.createUser(email, firstname, lastname,password))
 			return Response.ok().build();
 		return Response.status(Status.FORBIDDEN).build();
 	}
@@ -33,7 +32,7 @@ public class UserService {
 		User user = UserManager.getUser(email);
 		if (user == null)
 			return Response.status(Status.NOT_FOUND).build();
-		if (!UserManager.login(user, password))
+		if (UserManager.login(email, password) != null)
 			return Response.status(Status.FORBIDDEN).build();
 		return Response.ok().build();
 	}

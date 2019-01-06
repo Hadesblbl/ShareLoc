@@ -20,20 +20,6 @@ public class UserManager {
 		return daoUser.get(mail);
 	}
 	
-	public static boolean inscription(User user) {
-		User u = daoUser.get(user.getMail());
-		if (u != null)
-			return false;
-		daoUser.set(user);
-		return true;
-	}
-
-	public static boolean login(User user, String password) {
-		if(daoUser.get(user.getMail()) == user && user.getPassword().equals(password))
-			return true;
-		return false;
-	}
-	
 	public static boolean changeProfile(User current, User newProfil) {
 		if ((newProfil.getMail() != current.getMail() && daoUser.get(newProfil.getMail()) == null)
 				&& (!current.equals(newProfil))) {
@@ -42,24 +28,16 @@ public class UserManager {
 		}
 		return false;
 	}
-
-	public static boolean createInvitation(String colocID, String FromID, String ForID) {
+	
+	public static boolean sendInvitation(String senderID, String invitedID, String colocID) {
 		Colocation coloc = daoColoc.get(colocID);
-		User from = daoUser.get(FromID);
-		User For = daoUser.get(ForID);
-		if (coloc.getGestionnaire() == from && !coloc.getColocataires().contains(For)) {
-			// TODO comment faire l'invitation?
+		User sender = daoUser.get(senderID);
+		User invited = daoUser.get(invitedID);
+		if((coloc != null && sender != null && invited != null) && coloc.getGestionnaire() == sender){
+			coloc.addColocataire(invited);
 			return true;
 		}
 		return false;
-	}
-
-	public static boolean acceptInvitation(String coloc, String user) {
-		return ColocationManager.addUserToColoc(coloc, user);
-	}
-
-	public static boolean rejectInvitation() {
-		return false;// TODO
 	}
 	
 	public static List<User> getUsers() {

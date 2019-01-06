@@ -28,7 +28,11 @@ public abstract class DAOFactory<T> {
 	}
 	
 	public T get(String ID) {
-		return null;
+		return getEntityManager().find(classeEntite, ID);
+	}
+	
+	public T get(int ID) {
+		return getEntityManager().find(classeEntite, ID);
 	}
 	
 	public void remove(T object) {

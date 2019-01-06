@@ -9,9 +9,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import controller.ColocationManager;
-import controller.UserManager;
-import entities.Colocation;
-import entities.User;
 
 @Path("/coloc")
 public class ColocationService {
