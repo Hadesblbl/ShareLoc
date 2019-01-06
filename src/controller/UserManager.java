@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import dao.DAOUser;
 import entities.Colocation;
 import entities.User;
@@ -53,5 +55,26 @@ public class UserManager {
 
 	public static boolean rejectInvitation() {
 		return false;// TODO
+	}
+	
+	public static List<User> getUsers() {
+		List<User> lv = daoUser.findAll();
+		return lv;
+	}
+	
+	public static User login(String login, String password) {		
+		User u=daoUser.get(login);
+		if(u!=null && u.getPassword().equals(password))
+			return u;
+		return null;
+	}
+	
+	public static boolean createUser(String login, String password, String firstname, String lastname) {
+		User u = daoUser.get(login);
+		if (u == null) {
+			daoUser.set(new User(login, password, firstname, lastname));
+			return true;
+		}
+		return false;
 	}
 }
