@@ -28,11 +28,11 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToMany(fetch = EAGER)
+	@OneToMany
 	@JoinColumn
 	private ArrayList<AchievedService> services = new ArrayList<AchievedService>();
 	
-	@ManyToMany(fetch = EAGER)
+	@ManyToMany
 	private ArrayList<Colocation> colocs = new ArrayList<Colocation>();
 	
 	public User() {

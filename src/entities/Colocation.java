@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name = "Colocations")
@@ -22,11 +21,10 @@ public class Colocation  {
 	private User gestionnaire;
 	
 	@JoinColumn
-	@ManyToMany(fetch = EAGER)
+	@ManyToMany
 	private ArrayList<User> colocataires = new ArrayList<User>();
 	
 	public Colocation() {
-		
 	}
 	
 	public Colocation(String name, User gestionnaire) {
