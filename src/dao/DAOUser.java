@@ -5,7 +5,7 @@ import entities.User;
 public class DAOUser extends DAOFactory<User> {
 
 	public DAOUser() {
-		super();
+		super(User.class);
 	}
 	
 	@Override

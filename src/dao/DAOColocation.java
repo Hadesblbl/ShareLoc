@@ -5,7 +5,7 @@ import entities.Colocation;
 public class DAOColocation extends DAOFactory<Colocation> {
 
 	public DAOColocation() {
-		super();
+		super(Colocation.class);
 	}
 	
 	@Override

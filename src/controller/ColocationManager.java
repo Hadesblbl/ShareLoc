@@ -16,7 +16,7 @@ public class ColocationManager {
 		if(daoColoc.get(coloc.getName()) != null || user == null)
 			return false;
 		coloc.setGestionnaire(user);
-		daoColoc.create(coloc);
+		daoColoc.set(coloc);
 		return true;
 		
 	}

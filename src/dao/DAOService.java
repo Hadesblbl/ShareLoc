@@ -5,7 +5,7 @@ import entities.Service;
 public class DAOService extends DAOFactory<Service> {
 
 	public DAOService() {
-		super();
+		super(Service.class);
 	}
 	
 	@Override

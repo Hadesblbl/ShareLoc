@@ -20,7 +20,7 @@ public class UserManager {
 		User u = daoUser.get(user.getMail());
 		if (u != null)
 			return false;
-		daoUser.create(user);
+		daoUser.set(user);
 		return true;
 	}
 
