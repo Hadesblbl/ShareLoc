@@ -22,6 +22,8 @@ public class ColocationManager {
 		coloc = new Colocation(colocID, user);
 		coloc.setGestionnaire(user);
 		daoColoc.set(coloc);
+		user.getColocs().add(coloc);
+		daoUser.set(user);
 		return true;
 
 	}
@@ -30,7 +32,9 @@ public class ColocationManager {
 		Colocation coloc = daoColoc.get(colocID);
 		User user = daoUser.get(userID);
 		boolean status = coloc.addColocataire(user);
+		user.getColocs().add(coloc);
 		daoColoc.set(coloc);
+		daoUser.set(user);
 		return status;
 	}
 
@@ -39,7 +43,6 @@ public class ColocationManager {
 		User user = daoUser.get(userID);
 		boolean status = coloc.removeColocataire(user);
 		daoColoc.set(coloc);
-		// TODO remove coloc from user too
 		return status;
 	}
 
@@ -49,6 +52,7 @@ public class ColocationManager {
 		User currentUser = daoUser.get(userID);
 		if (coloc.getGestionnaire() == currentUser && user != null) {
 			coloc.setGestionnaire(user);
+			daoColoc.set(coloc);
 			return true;
 		}
 		return false;

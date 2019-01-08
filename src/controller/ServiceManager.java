@@ -34,6 +34,18 @@ public class ServiceManager {
 		Service service = daoService.get(serviceID);
 		if(user != null && service != null) {
 			service.putVote(user, response);
+			daoService.set(service);
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean validateService(String userID, int serviceID) {
+		User user = daoUser.get(userID);
+		Service service = daoService.get(serviceID);
+		if(user != null && service != null && service.getColoc().getGestionnaire() == user) {
+			service.setValidated(true);
+			daoService.set(service);
 			return true;
 		}
 		return false;

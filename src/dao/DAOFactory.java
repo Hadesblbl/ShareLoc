@@ -16,7 +16,7 @@ public abstract class DAOFactory<T> {
 	private Class<T> classeEntite;
 	
 	public DAOFactory(Class<T> classeEntite){
-		emf = Persistence.createEntityManagerFactory("ShareLoc");;
+		emf = Persistence.createEntityManagerFactory("ShareLock");;
 		em = emf.createEntityManager();
 		this.classeEntite = classeEntite;
 	}
