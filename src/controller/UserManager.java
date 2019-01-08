@@ -17,6 +17,9 @@ public class UserManager {
 	}
 
 	public static User getUser(String mail) {
+		if(mail==null) {
+			return null;
+		}
 		return daoUser.get(mail);
 	}
 	
@@ -45,14 +48,20 @@ public class UserManager {
 		return lv;
 	}
 	
-	public static User login(String login, String password) {		
+	public static User login(String login, String password) {	
+		if(login==null) {
+			return null;
+		}
 		User u=daoUser.get(login);
 		if(u!=null && u.getPassword().equals(password))
 			return u;
 		return null;
 	}
 	
-	public static boolean createUser(String login, String password, String firstname, String lastname) {
+	public static boolean createUser(String login, String password, String firstname, String lastname) throws NullPointerException{
+		if(login==null) {
+			throw new NullPointerException("Login must not be null");
+		}
 		User u = daoUser.get(login);
 		if (u == null) {
 			daoUser.set(new User(login, password, firstname, lastname));

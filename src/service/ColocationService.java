@@ -7,6 +7,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import controller.ColocationManager;
 
@@ -17,7 +18,9 @@ public class ColocationService {
 	@Path("/addcoloc")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createColoc(@FormParam("colocName") String colocName, @FormParam("mail") String mail) {
-		ColocationManager.createColocation(colocName, mail);
+		if (!ColocationManager.createColocation(colocName, mail)) {
+			return Response.status(Status.FORBIDDEN).build();
+		}
 		return Response.ok().build(); //TODO p-e rediriger
 	}
 	
@@ -25,7 +28,9 @@ public class ColocationService {
 	@Path("/addtocoloc")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addUserToColoc(@PathParam("coloc") String idcoloc,@PathParam("coloc") String iduser) {
-		ColocationManager.addUserToColoc(idcoloc, iduser); //TODO retrouver coloc et user depuis leurs id, rajouter cas d'erreur
+		if(!ColocationManager.addUserToColoc(idcoloc, iduser)) {
+			return Response.status(Status.FORBIDDEN).build();
+		}
 		return Response.ok().build();
 	}
 	
@@ -34,7 +39,9 @@ public class ColocationService {
 	@Path("/removefromcoloc")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response removeUserFromColoc(@PathParam("coloc") String idcoloc,@PathParam("coloc") String iduser) {
-		ColocationManager.removeUserFromColoc(idcoloc, iduser); //TODO pareil
+		if (!ColocationManager.removeUserFromColoc(idcoloc, iduser)) {
+			return Response.status(Status.FORBIDDEN).build();
+		}
 		return Response.ok().build();
 	}
 	
@@ -43,7 +50,9 @@ public class ColocationService {
 	@Path("/changeadmin")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response changeColocAdmin(@PathParam("coloc") String idcoloc,@PathParam("coloc") String iduser,@PathParam("admin") String idadmin) {
-		ColocationManager.changeColocAdmin(idcoloc, iduser, idadmin);
+		if (!ColocationManager.changeColocAdmin(idcoloc, iduser, idadmin)) {
+			return Response.status(Status.FORBIDDEN).build();
+		}
 		return Response.ok().build();
 	}
 }
