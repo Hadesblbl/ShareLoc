@@ -38,15 +38,6 @@ public class UserService {
 	}
 
 	@POST
-	@Path("/createprofile")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response createProfile(@FormParam("id") String id, @FormParam("pwd") String pwd,
-			@FormParam("fn") String firstname, @FormParam("ln") String lastname) {
-		System.out.println(id + " " + pwd);// TODO define profile
-		return Response.ok().build();
-	}
-
-	@POST
 	@Path("/changeprofile")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response changeProfile(@FormParam("mail") String mail,@FormParam("firstname") String firstname,@FormParam("lastname") String lastname, @FormParam("pwd") String pwd) {
@@ -55,7 +46,9 @@ public class UserService {
 		User newProfil = new User(mail, firstname, lastname, pwd);
 		if(!UserManager.changeProfile(user, newProfil))
 			return Response.status(Status.FORBIDDEN).build();
-		return Response.ok().build();
+		else {
+			return Response.ok().build();
+		}
 	}
 
 }
