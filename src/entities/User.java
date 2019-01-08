@@ -79,4 +79,20 @@ public class User {
 		this.password = password;
 	}
 
+	public ArrayList<AchievedService> getServices() {
+		return services;
+	}
+
+	public void setServices(ArrayList<AchievedService> services) {
+		this.services = services;
+	}
+
+	public ArrayList<Colocation> getColocs() {
+		return colocs;
+	}
+
+	public void setColocs(ArrayList<Colocation> colocs) {
+		this.colocs = colocs;
+	}
+
 }

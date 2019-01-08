@@ -25,7 +25,7 @@ public class AchievedServiceManager {
 		User from = daoUser.get(userId);
 		Service service = daoService.get(serviceId);
 		Colocation coloc = service.getColoc();
-		if(from == null || service == null || coloc == null)
+		if(from == null || service == null || coloc == null || service.isValidated())
 			return false;
 		ArrayList<User> to = new ArrayList<User>();
 		for (User u : coloc.getColocataires())
@@ -33,6 +33,8 @@ public class AchievedServiceManager {
 				to.add(u);
 		AchievedService as = new AchievedService(from, to, date, image, service);
 		daoAchievedService.set(as);
+		from.getServices().add(as);
+		daoUser.set(from);
 		return true;
 	}
 
@@ -42,6 +44,7 @@ public class AchievedServiceManager {
 		if(!as.getTo().contains(u)||as.getVotes().get(u) != null)
 			return false;
 		as.getVotes().put(u, statement);
+		daoAchievedService.set(as);
 		return true;
 		
 	}
