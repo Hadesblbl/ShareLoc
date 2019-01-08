@@ -18,7 +18,7 @@ import entities.User;
 import security.JWTokenUtility;
 import security.SigninNeeded;
 
-@Path("/")
+@Path("/auth")
 public class Authentification {
 
 	@GET
