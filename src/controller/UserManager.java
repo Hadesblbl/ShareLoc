@@ -38,6 +38,9 @@ public class UserManager {
 		User invited = daoUser.get(invitedID);
 		if((coloc != null && sender != null && invited != null) && coloc.getGestionnaire() == sender){
 			coloc.addColocataire(invited);
+			invited.getColocs().add(coloc);
+			daoColoc.set(coloc);
+			daoUser.set(invited);
 			return true;
 		}
 		return false;
@@ -64,7 +67,7 @@ public class UserManager {
 		}
 		User u = daoUser.get(login);
 		if (u == null) {
-			daoUser.set(new User(login, password, firstname, lastname));
+			daoUser.persist(new User(login, password, firstname, lastname));
 			return true;
 		}
 		return false;

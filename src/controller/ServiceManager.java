@@ -22,7 +22,7 @@ public class ServiceManager {
 		User user = daoUser.get(userID);
 		if(coloc != null && user != null) {
 			Service service = new Service(coloc, title, description, cost);
-			daoService.set(service);
+			daoService.persist(service);
 			voteService(user.getMail(),service.getID(), true);
 			return true;
 		}
@@ -50,7 +50,5 @@ public class ServiceManager {
 		}
 		return false;
 	}
-	
-	
 
 }

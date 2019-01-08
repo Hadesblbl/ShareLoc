@@ -6,16 +6,18 @@ import java.util.Vector;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 
 public abstract class DAOFactory<T> {
 	
-	protected static EntityManagerFactory emf;
+	protected static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ShareLock");
 	protected static EntityManager em ;
 	private Class<T> classeEntite;
 	
 	public DAOFactory(Class<T> classeEntite){
 		this.classeEntite = classeEntite;
+		getEntityManager();
 	}
 	
 	protected EntityManager getEntityManager() {
@@ -42,6 +44,13 @@ public abstract class DAOFactory<T> {
 	public void set(T object) {
 		em.getTransaction().begin();
 		em.refresh(object);
+		em.flush();
+		em.getTransaction().commit();
+	}
+	
+	public void persist(T object) {
+		em.getTransaction().begin();
+		em.persist(object);
 		em.flush();
 		em.getTransaction().commit();
 	}

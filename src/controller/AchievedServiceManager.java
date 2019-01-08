@@ -34,7 +34,7 @@ public class AchievedServiceManager {
 		AchievedService as = new AchievedService(from, to, date, image, service);
 		daoAchievedService.set(as);
 		from.getServices().add(as);
-		daoUser.set(from);
+		daoUser.persist(from);
 		return true;
 	}
 

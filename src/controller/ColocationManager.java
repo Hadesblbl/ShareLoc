@@ -21,7 +21,7 @@ public class ColocationManager {
 			return false;
 		coloc = new Colocation(colocID, user);
 		coloc.setGestionnaire(user);
-		daoColoc.set(coloc);
+		daoColoc.persist(coloc);
 		user.getColocs().add(coloc);
 		daoUser.set(user);
 		return true;
