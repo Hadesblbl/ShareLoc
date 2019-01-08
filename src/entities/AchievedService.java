@@ -1,6 +1,8 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="AchievedServices")
+@Table(name = "AchievedServices")
 public class AchievedService {
 
 	@Id
@@ -22,30 +24,32 @@ public class AchievedService {
 	private int ID;
 
 	@ManyToOne
-	@JoinColumn(name="from", referencedColumnName="mail")
+	@JoinColumn(name = "from", referencedColumnName = "mail")
 	private User from;
 
 	@OneToMany
-	@JoinColumn(name="to", referencedColumnName="mail")
+	@JoinColumn(name = "to", referencedColumnName = "mail")
 	private ArrayList<User> to = new ArrayList<User>();
-	
+
 	@Column(name = "Date")
 	private String date;
-	
+
+	@Column(name = "Image")
 	private String image;
-	
+
 	@Column(name = "Valid")
 	private boolean valid = false;
-	
+
 	@ManyToOne
-	@JoinColumn(name="Service", referencedColumnName="ID")
+	@JoinColumn(name = "Service", referencedColumnName = "ID")
 	private Service service;
-	
-	
+
+	private Map<User, Boolean> votes = new HashMap<User, Boolean>();
+
 	public AchievedService() {
-		
+
 	}
-	
+
 	public AchievedService(User from, ArrayList<User> to, String date, String image, Service service) {
 		setFrom(from);
 		setTo(to);
@@ -100,5 +104,13 @@ public class AchievedService {
 	public void setService(Service service) {
 		this.service = service;
 	}
-   
+
+	public Map<User, Boolean> getVotes() {
+		return votes;
+	}
+
+	public void setVotes(Map<User, Boolean> votes) {
+		this.votes = votes;
+	}
+
 }
