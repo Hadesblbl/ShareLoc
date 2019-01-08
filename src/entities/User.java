@@ -1,6 +1,9 @@
 package entities;
 
+import static javax.persistence.FetchType.EAGER;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name = "Users")
@@ -30,10 +32,10 @@ public class User {
 	
 	@OneToMany(mappedBy="from")
 	@JoinColumn(name="AchievedServices", referencedColumnName="ID")
-	private ArrayList<AchievedService> services = new ArrayList<AchievedService>();
+	private List<AchievedService> services = new ArrayList<AchievedService>();
 	
 	@ManyToMany(fetch = EAGER)
-	private ArrayList<Colocation> colocs = new ArrayList<Colocation>();
+	private List<Colocation> colocs = new ArrayList<Colocation>();
 	
 	public User() {
 		
@@ -79,7 +81,7 @@ public class User {
 		this.password = password;
 	}
 
-	public ArrayList<AchievedService> getServices() {
+	public List<AchievedService> getServices() {
 		return services;
 	}
 
@@ -87,7 +89,7 @@ public class User {
 		this.services = services;
 	}
 
-	public ArrayList<Colocation> getColocs() {
+	public List<Colocation> getColocs() {
 		return colocs;
 	}
 

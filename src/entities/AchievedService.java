@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class AchievedService {
 
 	@OneToMany
 	@JoinColumn(name = "to", referencedColumnName = "mail")
-	private ArrayList<User> to = new ArrayList<User>();
+	private List<User> to = new ArrayList<User>();
 
 	@Column(name = "Date")
 	private String date;
@@ -65,7 +66,7 @@ public class AchievedService {
 		this.from = from;
 	}
 
-	public ArrayList<User> getTo() {
+	public List<User> getTo() {
 		return to;
 	}
 

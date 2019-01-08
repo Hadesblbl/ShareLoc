@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class Colocation  {
 	
 	@ManyToMany(mappedBy = "colocs")
 	@JoinColumn(name="Colocataires", referencedColumnName="mail")
-	private ArrayList<User> colocataires = new ArrayList<User>();
+	private List<User> colocataires = new ArrayList<User>();
 	
 	public Colocation() {
 		
@@ -43,7 +44,7 @@ public class Colocation  {
 		this.name = name;
 	}
 
-	public ArrayList<User> getColocataires() {
+	public List<User> getColocataires() {
 		return colocataires;
 	}
 	
