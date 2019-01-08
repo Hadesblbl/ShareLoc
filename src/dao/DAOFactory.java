@@ -6,18 +6,15 @@ import java.util.Vector;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 
 public abstract class DAOFactory<T> {
 	
-	protected EntityManagerFactory emf;
-	protected EntityManager em ;
+	protected static EntityManagerFactory emf;
+	protected static EntityManager em ;
 	private Class<T> classeEntite;
 	
 	public DAOFactory(Class<T> classeEntite){
-		emf = Persistence.createEntityManagerFactory("ShareLock");;
-		em = emf.createEntityManager();
 		this.classeEntite = classeEntite;
 	}
 	
