@@ -28,29 +28,40 @@ public class ColocationManager {
 
 	}
 
-	public static boolean addUserToColoc(String colocID, String userID) {
+	public static boolean addUserToColoc(String colocID, String userID, String adminID) {
 		Colocation coloc = daoColoc.get(colocID);
 		User user = daoUser.get(userID);
-		boolean status = coloc.addColocataire(user);
-		user.getColocs().add(coloc);
-		daoColoc.set(coloc);
-		daoUser.set(user);
+		User admin = daoUser.get(adminID);
+		boolean status = false;
+		if (admin == coloc.getGestionnaire() && !coloc.getColocataires().contains(user)) {
+			status = coloc.addColocataire(user);
+			user.getColocs().add(coloc);
+			daoColoc.set(coloc);
+			daoUser.set(user);
+		}
 		return status;
 	}
 
-	public static boolean removeUserFromColoc(String colocID, String userID) {
+	public static boolean removeUserFromColoc(String colocID, String userID, String currentUserID) {
 		Colocation coloc = daoColoc.get(colocID);
 		User user = daoUser.get(userID);
-		boolean status = coloc.removeColocataire(user);
-		daoColoc.set(coloc);
+		User currentUser = daoUser.get(currentUserID);
+		boolean status = false;
+		if (currentUser == coloc.getGestionnaire()) {
+			status = coloc.removeColocataire(user);
+			user.getColocs().remove(coloc);
+			daoColoc.set(coloc);
+			daoUser.set(user);
+		}
 		return status;
 	}
 
 	public static boolean changeColocAdmin(String colocID, String currentUserID, String userID) {
 		Colocation coloc = daoColoc.get(colocID);
 		User user = daoUser.get(userID);
-		User currentUser = daoUser.get(userID);
-		if (coloc.getGestionnaire() == currentUser && user != null) {
+		User currentUser = daoUser.get(currentUserID);
+		if (coloc != null && currentUser != null && coloc.getGestionnaire() == currentUser && user != null
+				&& coloc.getColocataires().contains(user)) {
 			coloc.setGestionnaire(user);
 			daoColoc.set(coloc);
 			return true;

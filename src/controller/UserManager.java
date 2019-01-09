@@ -67,7 +67,7 @@ public class UserManager {
 		}
 		User u = daoUser.get(login);
 		if (u == null) {
-			daoUser.persist(new User(login, password, firstname, lastname));
+			daoUser.persist(new User(login, firstname, lastname,password));
 			return true;
 		}
 		return false;
