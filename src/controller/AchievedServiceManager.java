@@ -25,7 +25,7 @@ public class AchievedServiceManager {
 		User from = daoUser.get(userId);
 		Service service = daoService.get(serviceId);
 		Colocation coloc = service.getColoc();
-		if(from == null || service == null || coloc == null || service.isValidated())
+		if(from == null || service == null || coloc == null || !service.isValidated())
 			return false;
 		ArrayList<User> to = new ArrayList<User>();
 		for (User u : coloc.getColocataires())

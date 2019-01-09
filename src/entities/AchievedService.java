@@ -25,7 +25,7 @@ public class AchievedService {
 	private int ID;
 
 	@ManyToOne
-	@JoinColumn(name = "from", referencedColumnName = "mail")
+	@JoinColumn(name = "from_", referencedColumnName = "mail")
 	private User from;
 
 	@OneToMany

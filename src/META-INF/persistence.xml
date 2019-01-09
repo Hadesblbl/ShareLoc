@@ -3,8 +3,8 @@
 	<persistence-unit name="ShareLock" transaction-type="RESOURCE_LOCAL">
 		<class>entities.Colocation</class>
 		<class>entities.Service</class>
-		<class>entities.AchievedService</class>
 		<class>entities.User</class>
+		<class>entities.AchievedService</class>
 		<properties>
 			<property name="eclipselink.jdbc.batch-writing" value="Oracle-JDBC"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
