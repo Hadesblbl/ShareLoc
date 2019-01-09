@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import controller.ServiceManager;
+import controller.ServiceManager;	
 
 @Path("/service")
 public class ServiceService {
