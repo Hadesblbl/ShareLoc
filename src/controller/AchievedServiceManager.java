@@ -46,6 +46,5 @@ public class AchievedServiceManager {
 		as.getVotes().put(u, statement);
 		daoAchievedService.set(as);
 		return true;
-		
 	}
 }

@@ -43,7 +43,7 @@ public abstract class DAOFactory<T> {
 	
 	public void set(T object) {
 		em.getTransaction().begin();
-		em.refresh(object);
+		em.persist(object);
 		em.flush();
 		em.getTransaction().commit();
 	}
