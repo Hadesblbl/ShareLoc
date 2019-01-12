@@ -70,6 +70,13 @@ public class ServiceManager {
 		return response;
 	}
 	
+	public static String getAllServices() {
+		String response="";
+		for(Service service : daoService.findAll())
+			response += "ID: " + service.getID() + "\tTitle: " + service.getTitle() + "\tColocation: "
+					+ service.getColoc().getName()+"\r\n";
+		return response;
+	}
 	
 
 }

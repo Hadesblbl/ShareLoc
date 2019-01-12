@@ -92,4 +92,11 @@ public class ColocationManager {
 		}
 		return response;
 	}
+
+	public static String getAllColoc() {
+		String response = "";
+		for (Colocation coloc : daoColoc.findAll())
+			response += coloc.getName() + "\r\n\t";
+		return response;
+	}
 }
