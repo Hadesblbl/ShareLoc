@@ -3,6 +3,7 @@ package controller;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 import dao.DAOAchievedService;
 import dao.DAOService;
@@ -46,5 +47,33 @@ public class AchievedServiceManager {
 		as.getVotes().put(u, statement);
 		daoAchievedService.set(as);
 		return true;
+	}
+
+	public static String getAchievedServiceInfo(int id) {
+		Service service = daoService.get(id);
+		AchievedService achservice = daoAchievedService.get(id);
+		String response = "";
+		if (service != null) {
+			response += "ID: " + service.getID() + "\tTitle: " + service.getTitle() + "\tColocation: "
+					+ service.getColoc().getName() + "\tDescription: " + service.getDescription() + "\tCost:"+service.getCost()+"\tDate"+achservice.getDate()+"\tImage:"+achservice.getImage();
+			if(service.isValidated())
+				response += "Validated: True";
+			else {
+				response += "Validated: False\r\n";
+				for(Entry<User, Boolean> es : service.getVotes().entrySet())
+					response += "\r\n\t Mail: "+ es.getKey().getMail()+" Vote: "+ es.getValue();	
+			}
+		}
+		return response;
+	}
+
+	public static Object getAllAchievedServices() {
+		String response = "";
+		for (AchievedService achievedservice : daoAchievedService.findAll()) {
+			Service service = daoService.get(achievedservice.getService().getID());
+			response += "ID: " + service.getID() + "\tTitle: " + service.getTitle() + "\tColocation: "
+					+ service.getColoc().getName()+"\r\n";
+		}
+		return response;
 	}
 }

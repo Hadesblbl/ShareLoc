@@ -55,7 +55,7 @@ public class ServiceService {
 		String service = ServiceManager.getServiceInfo(id);
 		if(service == null)
 			return Response.status(Status.NOT_FOUND).build();
-		return Response.ok().entity(UserManager.getUserInfo(service)).build();
+		return Response.ok().entity(service).build();
 		
 	}
 	
