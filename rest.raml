@@ -1,0 +1,378 @@
+#%RAML 1.0
+title: 
+    value: Raml API generated from classes
+baseUri: 
+    value: "http://www.baseuri.com"
+mediaType: "*/*"
+version: 
+    value: 1.0
+types: 
+    Response: 
+        type: object
+        displayName: 
+            value: Response
+/achievedservice: 
+    /validate: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /validate
+    /declare: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /declare
+    displayName: 
+        value: /achievedservice
+/auth: 
+    /whoami: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: /whoami
+    /signup: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            queryParameters: 
+                login: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: login
+                password: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: password
+                firstname: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: firstname
+                lastname: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: lastname
+            displayName: 
+                value: post
+        displayName: 
+            value: /signup
+    /signin: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            queryParameters: 
+                login: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: login
+                password: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: password
+            displayName: 
+                value: post
+        displayName: 
+            value: /signin
+    displayName: 
+        value: /auth
+/coloc: 
+    /removefromcoloc: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            queryParameters: 
+                coloc: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: coloc
+                user: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: user
+                currentUser: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: currentUser
+            displayName: 
+                value: post
+        displayName: 
+            value: /removefromcoloc
+    /changeadmin: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            queryParameters: 
+                coloc: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: coloc
+                user: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: user
+                admin: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: admin
+            displayName: 
+                value: post
+        displayName: 
+            value: /changeadmin
+    /addtocoloc: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            queryParameters: 
+                coloc: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: coloc
+                user: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: user
+                currentUser: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: currentUser
+            displayName: 
+                value: post
+        displayName: 
+            value: /addtocoloc
+    /addcoloc: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            queryParameters: 
+                colocName: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: colocName
+                mail: 
+                    type: 
+                        type: string
+                        displayName: 
+                            value: type
+                    displayName: 
+                        value: mail
+            displayName: 
+                value: post
+        displayName: 
+            value: /addcoloc
+    displayName: 
+        value: /coloc
+/service: 
+    /validate: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /validate
+    /vote: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /vote
+    /add: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /add
+    displayName: 
+        value: /service
+/user: 
+    /changeprofile: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /changeprofile
+    /authenticate: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /authenticate
+    /add: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /add
+    displayName: 
+        value: /user
