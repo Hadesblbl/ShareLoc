@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,7 +31,7 @@ public class AchievedService {
 	@JoinColumn(name = "from_", referencedColumnName = "mail")
 	private User from_;
 
-	@OneToMany
+	@ManyToMany
 	@JoinColumn(name = "to", referencedColumnName = "mail")
 	private List<User> to = new ArrayList<User>();
 

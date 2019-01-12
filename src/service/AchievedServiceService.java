@@ -52,6 +52,6 @@ public class AchievedServiceService {
 	@Path("/listachievedservices")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listAchievedServices() {
-	return Response.ok().entity(AchievedServiceManager.getAllAchievedServices()).build();
+		return Response.ok().entity(AchievedServiceManager.getAllAchievedServices()).build();
 	}
 }
