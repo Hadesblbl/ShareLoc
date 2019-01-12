@@ -38,7 +38,7 @@ public class Service {
 	private boolean isValidated = false;
 
 	@ElementCollection
-	@CollectionTable(name = "Votes", joinColumns = @JoinColumn(name = "ID"))
+	@CollectionTable(name = "service_votes", joinColumns = @JoinColumn(name = "ID"))
 	private Map<User, Boolean> votes = new HashMap<User, Boolean>();
 
 	public Service() {

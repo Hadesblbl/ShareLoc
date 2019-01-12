@@ -30,7 +30,7 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToMany(mappedBy="from")
+	@OneToMany(mappedBy="from_")
 	@JoinColumn(name="AchievedServices", referencedColumnName="ID")
 	private List<AchievedService> services = new ArrayList<AchievedService>();
 	

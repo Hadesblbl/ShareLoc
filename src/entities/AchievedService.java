@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +28,7 @@ public class AchievedService {
 
 	@ManyToOne
 	@JoinColumn(name = "from_", referencedColumnName = "mail")
-	private User from;
+	private User from_;
 
 	@OneToMany
 	@JoinColumn(name = "to", referencedColumnName = "mail")
@@ -45,6 +47,11 @@ public class AchievedService {
 	@JoinColumn(name = "Service", referencedColumnName = "ID")
 	private Service service;
 
+	 @ElementCollection
+	 @CollectionTable(
+	        name="achieved_service_votes",
+	        joinColumns=@JoinColumn(name="ID")
+	)
 	private Map<User, Boolean> votes = new HashMap<User, Boolean>();
 
 	public AchievedService() {
@@ -52,18 +59,18 @@ public class AchievedService {
 	}
 
 	public AchievedService(User from, ArrayList<User> to, String date, String image, Service service) {
-		setFrom(from);
+		setFrom_(from);
 		setTo(to);
 		setImage(image);
 		setDate(date);
 	}
 
-	public User getFrom() {
-		return from;
+	public User getFrom_() {
+		return from_;
 	}
 
-	public void setFrom(User from) {
-		this.from = from;
+	public void setFrom_(User from) {
+		this.from_ = from;
 	}
 
 	public List<User> getTo() {

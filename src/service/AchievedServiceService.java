@@ -11,8 +11,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import controller.AchievedServiceManager;
-import controller.ServiceManager;
-import controller.UserManager;
 
 @Path("/achievedservice")
 public class AchievedServiceService {
