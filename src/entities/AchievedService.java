@@ -63,6 +63,7 @@ public class AchievedService {
 		setTo_(to);
 		setImage(image);
 		setDate(date);
+		setService(service);
 	}
 
 	public User getFrom_() {

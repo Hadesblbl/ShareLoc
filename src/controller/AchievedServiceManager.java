@@ -50,10 +50,10 @@ public class AchievedServiceManager {
 	}
 
 	public static String getAchievedServiceInfo(int id) {
-		Service service = daoService.get(id);
 		AchievedService achservice = daoAchievedService.get(id);
 		String response = "";
-		if (service != null) {
+		if (achservice != null) {
+			Service service = achservice.getService();
 			response += "ID: " + service.getID() + "\tTitle: " + service.getTitle() + "\tColocation: "
 					+ service.getColoc().getName() + "\tDescription: " + service.getDescription() + "\tCost:"+service.getCost()+"\tDate"+achservice.getDate()+"\tImage:"+achservice.getImage();
 			if(service.isValidated())
