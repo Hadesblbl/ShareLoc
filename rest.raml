@@ -12,6 +12,36 @@ types:
         displayName: 
             value: Response
 /achievedservice: 
+    /achievedserviceinfo/{id}: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: "/achievedserviceinfo/{id}"
+    /listachievedservices: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: /listachievedservices
     /validate: 
         post: 
             responses: 
@@ -211,6 +241,36 @@ types:
                 value: post
         displayName: 
             value: /changeadmin
+    /colocinfo/{id}: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: "/colocinfo/{id}"
+    /listcolocs: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: /listcolocs
     /addtocoloc: 
         post: 
             responses: 
@@ -281,6 +341,36 @@ types:
     displayName: 
         value: /coloc
 /service: 
+    /serviceinfo/{id}: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: "/serviceinfo/{id}"
+    /listservices: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: /listservices
     /validate: 
         post: 
             responses: 
@@ -359,6 +449,36 @@ types:
                 value: post
         displayName: 
             value: /authenticate
+    /userinfo/{mail}: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: "/userinfo/{mail}"
+    /listusers: 
+        get: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: get
+        displayName: 
+            value: /listusers
     /add: 
         post: 
             responses: 
