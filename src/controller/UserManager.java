@@ -85,7 +85,7 @@ public class UserManager {
 			response += coloc.getName();
 			if(coloc.getGestionnaire() == user) 
 				response += "(Admin)";
-			response += "Points de services : "+getColocationPoints(mail, coloc.getName())+"\r\n\t";
+			response += " Points de services : "+getColocationPoints(mail, coloc.getName())+"\r\n\t";
 		}
 		return response;
 	}
@@ -95,10 +95,16 @@ public class UserManager {
 		Colocation coloc = daoColoc.get(colocName);
 		int score = 0;
 		for(AchievedService service : user.getServices()) {
-			if(service.getService().getColoc() == coloc && service.isValid()) {
+			if(service.getService().getColoc() == coloc && service.isValid()) 
 				score+= service.getService().getCost();
-			}
 		}
 		return score;
+	}
+	
+	public static String getAllUsers() {
+		String response = "";
+		for(User user : daoUser.findAll()) 
+			response += user.getMail()+"\r\n";
+		return response;
 	}
 }

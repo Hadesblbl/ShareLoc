@@ -1,14 +1,17 @@
 package controller;
 
 import dao.DAOColocation;
+import dao.DAOService;
 import dao.DAOUser;
 import entities.Colocation;
+import entities.Service;
 import entities.User;
 
 public class ColocationManager {
 
 	private static DAOColocation daoColoc = new DAOColocation();
 	private static DAOUser daoUser = new DAOUser();
+	private static DAOService daoService = new DAOService();
 
 	private ColocationManager() {
 
@@ -67,5 +70,26 @@ public class ColocationManager {
 			return true;
 		}
 		return false;
+	}
+
+	public static String getColocInfo(String colocName) {
+		String response = "";
+		Colocation coloc = daoColoc.get(colocName);
+		if (coloc == null) {
+			response = "Colocation : \r\n Name : " + coloc.getName() + "\r\n Admin : "
+					+ coloc.getGestionnaire().getMail() + "\r\n\r\nColocataires : ";
+			for (User user : coloc.getColocataires()) {
+				response += "\r\n\t" + user.getMail();
+				if (coloc.getGestionnaire() == user)
+					response += " (Admin)";
+				response += " Points de service : " + UserManager.getColocationPoints(user.getMail(), colocName);
+			}
+			response += "\r\n\r\nService : \r\n";
+			for (Service service : daoService.findAll())
+				if (service.getColoc() == coloc) {
+					response += "\tID : " + service.getID() + " Title :" + service.getTitle();
+				}
+		}
+		return response;
 	}
 }

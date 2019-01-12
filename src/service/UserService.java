@@ -1,6 +1,7 @@
 package service;
 
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -49,6 +50,24 @@ public class UserService {
 		else {
 			return Response.ok().build();
 		}
+	}
+	
+	@GET
+	@Path("/userinfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response userInfo(@FormParam("mail") String mail) {
+		User user = UserManager.getUser(mail);
+		if(user == null)
+			return Response.status(Status.NOT_FOUND).build();
+		return Response.ok().entity(UserManager.getUserInfo(mail)).build();
+		
+	}
+	
+	@GET
+	@Path("/listusers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listUsers(@FormParam("mail") String mail) {
+		return Response.ok().entity(UserManager.getAllUsers()).build();
 	}
 
 }

@@ -50,5 +50,14 @@ public class ServiceManager {
 		}
 		return false;
 	}
+	
+	public static String getServiceInfo(int id) {
+		Service service = daoService.get(id);
+		String response = "";
+		if(service != null) {
+			
+		}
+		return response;
+	}
 
 }
