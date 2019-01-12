@@ -1,9 +1,11 @@
 package service;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -53,9 +55,9 @@ public class UserService {
 	}
 	
 	@GET
-	@Path("/userinfo")
+	@Path("/userinfo/{mail}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response userInfo(@FormParam("mail") String mail) {
+	public Response userInfo(@PathParam("mail") String mail) {
 		User user = UserManager.getUser(mail);
 		if(user == null)
 			return Response.status(Status.NOT_FOUND).build();
@@ -66,7 +68,7 @@ public class UserService {
 	@GET
 	@Path("/listusers")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response listUsers(@FormParam("mail") String mail) {
+	public Response listUsers() {
 		return Response.ok().entity(UserManager.getAllUsers()).build();
 	}
 
