@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.DAOColocation;
 import dao.DAOUser;
+import entities.AchievedService;
 import entities.Colocation;
 import entities.User;
 
@@ -32,7 +33,7 @@ public class UserManager {
 		return false;
 	}
 	
-	public static boolean sendInvitation(String senderID, String invitedID, String colocID) {
+	/*public static boolean sendInvitation(String senderID, String invitedID, String colocID) {
 		Colocation coloc = daoColoc.get(colocID);
 		User sender = daoUser.get(senderID);
 		User invited = daoUser.get(invitedID);
@@ -44,7 +45,7 @@ public class UserManager {
 			return true;
 		}
 		return false;
-	}
+	}*/
 	
 	public static List<User> getUsers() {
 		List<User> lv = daoUser.findAll();
@@ -71,5 +72,33 @@ public class UserManager {
 			return true;
 		}
 		return false;
+	}
+	
+	public static String getUserInfo(String mail) {
+		String response;
+		User user = daoUser.get(mail);
+		response = 	"User : " + user.getMail() +"\r\n" +
+					"FirstName : " + user.getFirstname()+"\r\n" + 
+					"LastName : " + user.getLastname()+"\r\n"+"\r\n"+
+					"Colocations : " + "\r\n\t";
+		for(Colocation coloc : user.getColocs()) {
+			response += coloc.getName();
+			if(coloc.getGestionnaire() == user) 
+				response += "(Admin)";
+			response += "Points de services : "+getColocationPoints(mail, coloc.getName())+"\r\n\t";
+		}
+		return response;
+	}
+	
+	public static int getColocationPoints(String mail, String colocName) {
+		User user = daoUser.get(mail);
+		Colocation coloc = daoColoc.get(colocName);
+		int score = 0;
+		for(AchievedService service : user.getServices()) {
+			if(service.getService().getColoc() == coloc && service.isValid()) {
+				score+= service.getService().getCost();
+			}
+		}
+		return score;
 	}
 }
