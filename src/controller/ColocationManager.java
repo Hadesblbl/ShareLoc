@@ -75,7 +75,7 @@ public class ColocationManager {
 	public static String getColocInfo(String colocName) {
 		String response = "";
 		Colocation coloc = daoColoc.get(colocName);
-		if (coloc == null) {
+		if (coloc != null) {
 			response = "Colocation : \r\n Name : " + coloc.getName() + "\r\n Admin : "
 					+ coloc.getGestionnaire().getMail() + "\r\n\r\nColocataires : ";
 			for (User user : coloc.getColocataires()) {
