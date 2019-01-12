@@ -3,3 +3,5 @@
 /.settings/
 /.classpath
 /.project
+target/m2e-wtp/web-resources/META-INF/maven/ShareLock/ShareLock/pom.properties
+src/META-INF/persistence.xml

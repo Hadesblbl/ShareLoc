@@ -32,7 +32,7 @@ public class ServiceManager {
 	public static boolean voteService(String userID, int serviceID, boolean response) {
 		User user = daoUser.get(userID);
 		Service service = daoService.get(serviceID);
-		if(user != null && service != null) {
+		if(user != null && service != null && service.isValidated()) {
 			service.putVote(user, response);
 			daoService.set(service);
 			return true;
