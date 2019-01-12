@@ -62,7 +62,7 @@ public class ColocationService {
 	}
 	
 	@GET
-	@Path("/colocinfo/{mail}")
+	@Path("/colocinfo/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response colocInfo(@PathParam("id") String id) {
 		String coloc = ColocationManager.getColocInfo(id);
