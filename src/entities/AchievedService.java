@@ -13,8 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,9 +30,9 @@ public class AchievedService {
 	@JoinColumn(name = "from_", referencedColumnName = "mail")
 	private User from_;
 
-	@OneToMany
-	@JoinColumn(name = "to", referencedColumnName = "mail")
-	private List<User> to = new ArrayList<User>();
+	@ManyToMany
+	@JoinColumn(name = "to_", referencedColumnName = "mail")
+	private List<User> to_ = new ArrayList<User>();
 
 	@Column(name = "Date")
 	private String date;
@@ -60,7 +60,7 @@ public class AchievedService {
 
 	public AchievedService(User from, ArrayList<User> to, String date, String image, Service service) {
 		setFrom_(from);
-		setTo(to);
+		setTo_(to);
 		setImage(image);
 		setDate(date);
 	}
@@ -73,12 +73,12 @@ public class AchievedService {
 		this.from_ = from;
 	}
 
-	public List<User> getTo() {
-		return to;
+	public List<User> getTo_() {
+		return to_;
 	}
 
-	public void setTo(ArrayList<User> to) {
-		this.to = to;
+	public void setTo_(ArrayList<User> to_) {
+		this.to_ = to_;
 	}
 
 	public String getDate() {

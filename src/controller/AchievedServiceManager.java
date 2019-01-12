@@ -33,7 +33,7 @@ public class AchievedServiceManager {
 			if (u != from)
 				to.add(u);
 		AchievedService as = new AchievedService(from, to, date, image, service);
-		daoAchievedService.set(as);
+		daoAchievedService.persist(as);
 		from.getServices().add(as);
 		daoUser.persist(from);
 		return true;
@@ -42,7 +42,7 @@ public class AchievedServiceManager {
 	public static boolean validateServiceDeclaration(int achievedServiceId, String userId, boolean statement) {
 		AchievedService as = daoAchievedService.get(achievedServiceId);
 		User u = daoUser.get(userId);
-		if(!as.getTo().contains(u)||as.getVotes().get(u) != null)
+		if(!as.getTo_().contains(u)||as.getVotes().get(u) != null)
 			return false;
 		as.getVotes().put(u, statement);
 		daoAchievedService.set(as);

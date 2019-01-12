@@ -34,9 +34,9 @@ public class ServiceManager {
 	public static boolean voteService(String userID, int serviceID, boolean response) {
 		User user = daoUser.get(userID);
 		Service service = daoService.get(serviceID);
-		if (user != null && service != null && service.isValidated()) {
+		if (user != null && service != null && !service.isValidated()) {
 			service.putVote(user, response);
-			daoService.set(service);
+			daoService.persist(service);
 			return true;
 		}
 		return false;
