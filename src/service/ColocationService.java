@@ -6,11 +6,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.Response.Status;
 
 import controller.ColocationManager;
+import controller.UserManager;
+import entities.User;
+import security.SigninNeeded;
 
 @Path("/coloc")
 public class ColocationService {
@@ -74,6 +79,28 @@ public class ColocationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listColocs() {
 		return Response.ok().entity(ColocationManager.getAllColocs()).build();
+	}
+	
+	@POST
+	@SigninNeeded
+	@Path("/sendMessage")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response sendMessage(@Context SecurityContext security, @PathParam("coloc") String colocID, @QueryParam("message") String message) {
+		User user = UserManager.getUser(security.getUserPrincipal().getName());
+		if (user!=null && !ColocationManager.sendMessage(security.getUserPrincipal().getName(), colocID, message)) 
+			return Response.ok().build();
+		return Response.status(Status.NETWORK_AUTHENTICATION_REQUIRED).build();	
+	}
+	
+	@GET
+	@SigninNeeded
+	@Path("/listMessage")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listMessage(@Context SecurityContext security, @PathParam("coloc") String colocID) {
+		User user = UserManager.getUser(security.getUserPrincipal().getName());
+		if (user!=null)
+			Response.ok().entity(ColocationManager.getMessages(colocID, security.getUserPrincipal().getName())).build();
+		return Response.status(Status.NETWORK_AUTHENTICATION_REQUIRED).build();	
 	}
 
 }
