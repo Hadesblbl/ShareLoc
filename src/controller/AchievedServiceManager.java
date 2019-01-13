@@ -72,7 +72,7 @@ public class AchievedServiceManager {
 		for (AchievedService achievedservice : daoAchievedService.findAll()) {
 			Service service = daoService.get(achievedservice.getService().getID());
 			response += "ID: " + service.getID() + "\tTitle: " + service.getTitle() + "\tColocation: "
-					+ service.getColoc().getName()+"\r\n";
+					+ service.getColoc().getName()+"\tDate"+achievedservice.getDate()+"\tImage:"+achievedservice.getImage()+"\r\n";
 		}
 		return response;
 	}
