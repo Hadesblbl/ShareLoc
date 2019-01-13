@@ -6,11 +6,15 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.SecurityContext;
 
 import controller.AchievedServiceManager;
+import controller.UserManager;
+import entities.User;
 
 @Path("/achievedservice")
 public class AchievedServiceService {
@@ -19,8 +23,9 @@ public class AchievedServiceService {
 	@POST
 	@Path("/declare")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response declareAchievedService(@FormParam("service") int serviceId,@FormParam("user")  String userId,@FormParam("image")  String image,@FormParam("coloc")  String colocId) {
-		if (!AchievedServiceManager.declareAchievedService(serviceId, userId, image, colocId)) {
+	public Response declareAchievedService(@Context SecurityContext security,@FormParam("service") int serviceId,@FormParam("image")  String image,@FormParam("coloc")  String colocId) {
+		User user = UserManager.getUser(security.getUserPrincipal().getName());
+		if (!AchievedServiceManager.declareAchievedService(serviceId, user.getMail(), image, colocId)) {
 			return Response.status(Status.FORBIDDEN).build();
 		}
 		return Response.ok().build();
@@ -29,8 +34,9 @@ public class AchievedServiceService {
 	@POST
 	@Path("/vote")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response voteAchievedService(@FormParam("service") int achievedServiceId,@FormParam("user")  String userId,@FormParam("statement")  boolean statement) {
-		if (!AchievedServiceManager.voteAchievedService(achievedServiceId, userId, statement)) {
+	public Response voteAchievedService(@Context SecurityContext security, @FormParam("service") int achievedServiceId, @FormParam("statement")  boolean statement) {
+		User user = UserManager.getUser(security.getUserPrincipal().getName());
+		if (!AchievedServiceManager.voteAchievedService(achievedServiceId, user.getMail(), statement)) {
 			return Response.status(Status.FORBIDDEN).build();
 		}
 		return Response.ok().build();
@@ -40,8 +46,9 @@ public class AchievedServiceService {
 	@POST
 	@Path("/validate")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response validateServiceDeclaration(@FormParam("service") int achievedServiceId,@FormParam("user")  String userId) {
-		if (!AchievedServiceManager.validateServiceDeclaration(achievedServiceId, userId))
+	public Response validateServiceDeclaration(@Context SecurityContext security, @FormParam("service") int achievedServiceId) {
+		User user = UserManager.getUser(security.getUserPrincipal().getName());
+		if (!AchievedServiceManager.validateServiceDeclaration(achievedServiceId, user.getMail()))
 			return Response.status(Status.FORBIDDEN).build();
 		return Response.ok().build();
 	}

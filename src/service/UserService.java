@@ -6,9 +6,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.SecurityContext;
 
 import controller.UserManager;
 import entities.User;
@@ -30,7 +32,6 @@ public class UserService {
 	@Path("/authenticate")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response authenticateUser(@FormParam("email") String email, @FormParam("password") String password) {
-		System.out.println(email + " " + password);
 		User user = UserManager.getUser(email);
 		if (user == null)
 			return Response.status(Status.NOT_FOUND).build();
@@ -42,10 +43,9 @@ public class UserService {
 	@POST
 	@Path("/changeprofile")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response changeProfile(@FormParam("mail") String mail,@FormParam("firstname") String firstname,@FormParam("lastname") String lastname, @FormParam("pwd") String pwd) {
-		System.out.println(mail + " " + pwd);
-		User user = UserManager.getUser(mail);
-		User newProfil = new User(mail, firstname, lastname, pwd);
+	public Response changeProfile(@Context SecurityContext security,@FormParam("firstname") String firstname,@FormParam("lastname") String lastname, @FormParam("pwd") String pwd) {
+		User user = UserManager.getUser(security.getUserPrincipal().getName());
+		User newProfil = new User(user.getMail(), firstname, lastname, pwd);
 		if(!UserManager.changeProfile(user, newProfil))
 			return Response.status(Status.FORBIDDEN).build();
 		else {
