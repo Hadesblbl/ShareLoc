@@ -2,7 +2,7 @@
 title: 
     value: Raml API generated from classes
 baseUri: 
-    value: "http://localhost:8080"
+    value: "localhost:8080"
 mediaType: "*/*"
 version: 
     value: 1.0
@@ -14,7 +14,7 @@ types:
 /achievedservice: 
     /achievedserviceinfo/{id}: 
         get: 
-            description: returns the achieved service with the corresponding ID
+            description: Retrieves the corresponding achieved service
             responses: 
                 200: 
                     body: 
@@ -30,7 +30,7 @@ types:
             value: "/achievedserviceinfo/{id}"
     /listachievedservices: 
         get: 
-            description: returns all achieved services
+            description: Retrieves all achieved services
             responses: 
                 200: 
                     body: 
@@ -46,7 +46,7 @@ types:
             value: /listachievedservices
     /validate: 
         post: 
-            description: validates an achieved service
+            description: Validates an achieved service
             responses: 
                 200: 
                     body: 
@@ -62,6 +62,7 @@ types:
             value: /validate
     /declare: 
         post: 
+            description: Declares an achieved service
             responses: 
                 200: 
                     body: 
@@ -77,6 +78,7 @@ types:
             value: /declare
     /vote: 
         post: 
+            description: Votes for an achieved service
             responses: 
                 200: 
                     body: 
@@ -95,6 +97,7 @@ types:
 /auth: 
     /whoami: 
         get: 
+            description: Gets yourself
             responses: 
                 200: 
                     body: 
@@ -110,6 +113,7 @@ types:
             value: /whoami
     /signup: 
         post: 
+            description: Creates a new account
             responses: 
                 200: 
                     body: 
@@ -154,6 +158,7 @@ types:
             value: /signup
     /signin: 
         post: 
+            description: Logs in and get a JWT
             responses: 
                 200: 
                     body: 
@@ -187,6 +192,7 @@ types:
 /coloc: 
     /removefromcoloc: 
         post: 
+            description: Removes an user from the colocation
             responses: 
                 200: 
                     body: 
@@ -224,6 +230,7 @@ types:
             value: /removefromcoloc
     /changeadmin: 
         post: 
+            description: Changes the administrator of a colocation
             responses: 
                 200: 
                     body: 
@@ -261,6 +268,7 @@ types:
             value: /changeadmin
     /colocinfo/{id}: 
         get: 
+            description: Gets the informations about a colocation
             responses: 
                 200: 
                     body: 
@@ -276,6 +284,7 @@ types:
             value: "/colocinfo/{id}"
     /listcolocs: 
         get: 
+            description: Gets all colocations
             responses: 
                 200: 
                     body: 
@@ -291,6 +300,7 @@ types:
             value: /listcolocs
     /addtocoloc: 
         post: 
+            description: Adds someone to the colocation
             responses: 
                 200: 
                     body: 
@@ -328,6 +338,7 @@ types:
             value: /addtocoloc
     /addcoloc: 
         post: 
+            description: Creates a new colocation
             responses: 
                 200: 
                     body: 
@@ -361,6 +372,7 @@ types:
 /service: 
     /serviceinfo/{id}: 
         get: 
+            description: Gets the information about the corresponding service
             responses: 
                 200: 
                     body: 
@@ -376,6 +388,7 @@ types:
             value: "/serviceinfo/{id}"
     /listservices: 
         get: 
+            description: Gets all the services
             responses: 
                 200: 
                     body: 
@@ -391,6 +404,7 @@ types:
             value: /listservices
     /validate: 
         post: 
+            description: Validates a service
             responses: 
                 200: 
                     body: 
@@ -406,6 +420,7 @@ types:
             value: /validate
     /vote: 
         post: 
+            description: Votes for a service
             responses: 
                 200: 
                     body: 
@@ -421,6 +436,7 @@ types:
             value: /vote
     /add: 
         post: 
+            description: Add a new service
             responses: 
                 200: 
                     body: 
@@ -439,6 +455,7 @@ types:
 /user: 
     /changeprofile: 
         post: 
+            description: Change the information in the user profile
             responses: 
                 200: 
                     body: 
@@ -454,6 +471,7 @@ types:
             value: /changeprofile
     /authenticate: 
         post: 
+            description: Logs in
             responses: 
                 200: 
                     body: 
@@ -469,6 +487,7 @@ types:
             value: /authenticate
     /userinfo/{mail}: 
         get: 
+            description: Gets the information about the corresponding user
             responses: 
                 200: 
                     body: 
@@ -484,6 +503,7 @@ types:
             value: "/userinfo/{mail}"
     /listusers: 
         get: 
+            description: Gets all users
             responses: 
                 200: 
                     body: 
@@ -499,6 +519,7 @@ types:
             value: /listusers
     /add: 
         post: 
+            description: Adds a new user
             responses: 
                 200: 
                     body: 
