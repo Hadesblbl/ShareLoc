@@ -25,15 +25,24 @@ public class AchievedServiceService {
 		}
 		return Response.ok().build();
 	}
+	
+	@POST
+	@Path("/vote")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response voteAchievedService(@FormParam("service") int achievedServiceId,@FormParam("user")  String userId,@FormParam("statement")  boolean statement) {
+		if (!AchievedServiceManager.voteAchievedService(achievedServiceId, userId, statement)) {
+			return Response.status(Status.FORBIDDEN).build();
+		}
+		return Response.ok().build();
+	}
 
 
 	@POST
 	@Path("/validate")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response validateServiceDeclaration(@FormParam("service") int achievedServiceId,@FormParam("user")  String userId,@FormParam("statement")  boolean statement) {
-		if (!AchievedServiceManager.validateServiceDeclaration(achievedServiceId, userId, statement)) {
+	public Response validateServiceDeclaration(@FormParam("service") int achievedServiceId,@FormParam("user")  String userId) {
+		if (!AchievedServiceManager.validateServiceDeclaration(achievedServiceId, userId))
 			return Response.status(Status.FORBIDDEN).build();
-		}
 		return Response.ok().build();
 	}
 	

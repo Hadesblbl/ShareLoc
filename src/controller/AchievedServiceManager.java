@@ -39,7 +39,17 @@ public class AchievedServiceManager {
 		return true;
 	}
 
-	public static boolean validateServiceDeclaration(int achievedServiceId, String userId, boolean statement) {
+	public static boolean validateServiceDeclaration(int achievedServiceId, String userId) {
+		AchievedService as = daoAchievedService.get(achievedServiceId);
+		User u = daoUser.get(userId);
+		if(as == null || as.getService().getColoc().getGestionnaire() != u)
+			return false;
+		as.setValid(true);
+		daoAchievedService.set(as);
+		return true;
+	}
+	
+	public static boolean voteAchievedService(int achievedServiceId, String userId, boolean statement) {
 		AchievedService as = daoAchievedService.get(achievedServiceId);
 		User u = daoUser.get(userId);
 		if(!as.getTo_().contains(u)||as.getVotes().get(u) != null)
@@ -47,6 +57,7 @@ public class AchievedServiceManager {
 		as.getVotes().put(u, statement);
 		daoAchievedService.set(as);
 		return true;
+		
 	}
 
 	public static String getAchievedServiceInfo(int id) {
