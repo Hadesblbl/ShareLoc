@@ -121,7 +121,10 @@ public class ColocationManager {
 		Colocation coloc = daoColoc.get(colocID);
 		User user = daoUser.get(userID);
 		if (coloc.getColocataires().contains(user)) {
-			daoMessage.persist(new Message(user, message, coloc));
+			Message m = new Message(user, message, coloc);
+			coloc.getMessages().add(m);
+			daoMessage.persist(m);
+			daoColoc.persist(coloc);
 			return true;
 		}
 		return false;

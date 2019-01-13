@@ -26,8 +26,7 @@ public class Colocation  {
 	@JoinColumn(name="Colocataires", referencedColumnName="mail")
 	private List<User> colocataires = new ArrayList<User>();
 	
-	@OneToMany
-	@JoinColumn(name="message", referencedColumnName="id")
+	@OneToMany(mappedBy="coloc")
 	private List<Message> messages = new ArrayList<Message>();
 	
 	public Colocation() {
