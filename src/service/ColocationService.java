@@ -22,7 +22,7 @@ public class ColocationService {
 		if (!ColocationManager.createColocation(colocName, mail)) {
 			return Response.status(Status.FORBIDDEN).build();
 		}
-		return Response.ok().build(); // TODO p-e rediriger
+		return Response.ok().build();
 	}
 
 	@POST
@@ -74,6 +74,29 @@ public class ColocationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listColocs() {
 		return Response.ok().entity(ColocationManager.getAllColocs()).build();
+	}
+	
+	@POST
+	//@SigninNeeded
+	//@Context SecurityContext security
+	@Path("/sendMessage/{coloc}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response sendMessage(@QueryParam("user")String user, @PathParam("coloc") String colocID, @QueryParam("message") String message) {
+		//User user = UserManager.getUser(security.getUserPrincipal().getName());
+		if (user!=null && ColocationManager.sendMessage(user, colocID, message)) 
+			return Response.ok().build();
+		return Response.status(Status.NETWORK_AUTHENTICATION_REQUIRED).build();	
+	}
+	
+	@GET
+	//@SigninNeeded
+	@Path("/listMessage/{coloc}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listMessage(@QueryParam("user")String user, @PathParam("coloc") String colocID) {
+		//User user = UserManager.getUser(user);
+		if (user!=null)
+			return Response.ok().entity(ColocationManager.getMessages(colocID,user)).build();
+		return Response.status(Status.NETWORK_AUTHENTICATION_REQUIRED).build();	
 	}
 
 }

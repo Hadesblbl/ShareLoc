@@ -1,9 +1,11 @@
 package controller;
 
 import dao.DAOColocation;
+import dao.DAOMessage;
 import dao.DAOService;
 import dao.DAOUser;
 import entities.Colocation;
+import entities.Message;
 import entities.Service;
 import entities.User;
 
@@ -12,6 +14,7 @@ public class ColocationManager {
 	private static DAOColocation daoColoc = new DAOColocation();
 	private static DAOUser daoUser = new DAOUser();
 	private static DAOService daoService = new DAOService();
+	private static DAOMessage daoMessage = new DAOMessage();
 
 	private ColocationManager() {
 
@@ -98,5 +101,32 @@ public class ColocationManager {
 		for (Colocation coloc : daoColoc.findAll())
 			response += coloc.getName() + "\r\n\t";
 		return response;
+	}
+
+	public static String getMessages(String colocID, String userID) {
+		Colocation coloc = daoColoc.get(colocID);
+		User user = daoUser.get(userID);
+		String response = "Messagerie : \r\n\r\n";
+		if (coloc.getColocataires().contains(user)) {
+			for (Message message : coloc.getMessages()) {
+				response += message.getUser().getFirstname() + " " + message.getUser().getLastname() + " : (à "
+						+ message.getDate() + ") : ";
+				response += message.getContain() + "\r\n\r\n";
+			}
+		}
+		return response;
+	}
+
+	public static boolean sendMessage(String userID, String colocID, String message) {
+		Colocation coloc = daoColoc.get(colocID);
+		User user = daoUser.get(userID);
+		if (coloc.getColocataires().contains(user)) {
+			Message m = new Message(user, message, coloc);
+			coloc.getMessages().add(m);
+			daoMessage.persist(m);
+			daoColoc.persist(coloc);
+			return true;
+		}
+		return false;
 	}
 }
