@@ -2,7 +2,7 @@
 title: 
     value: Raml API generated from classes
 baseUri: 
-    value: "http://www.baseuri.com"
+    value: "http://localhost:8080"
 mediaType: "*/*"
 version: 
     value: 1.0
@@ -14,6 +14,7 @@ types:
 /achievedservice: 
     /achievedserviceinfo/{id}: 
         get: 
+            description: returns the achieved service with the corresponding ID
             responses: 
                 200: 
                     body: 
@@ -29,6 +30,7 @@ types:
             value: "/achievedserviceinfo/{id}"
     /listachievedservices: 
         get: 
+            description: returns all achieved services
             responses: 
                 200: 
                     body: 
@@ -44,6 +46,7 @@ types:
             value: /listachievedservices
     /validate: 
         post: 
+            description: validates an achieved service
             responses: 
                 200: 
                     body: 
@@ -72,6 +75,21 @@ types:
                 value: post
         displayName: 
             value: /declare
+    /vote: 
+        post: 
+            responses: 
+                200: 
+                    body: 
+                        application/json: 
+                            type: Response
+                            displayName: 
+                                value: application/json
+                    displayName: 
+                        value: 200
+            displayName: 
+                value: post
+        displayName: 
+            value: /vote
     displayName: 
         value: /achievedservice
 /auth: 
